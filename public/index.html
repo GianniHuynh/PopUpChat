@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css"   href="/css/style.css">
+    
+    <title>UrChat</title>
+</head>
+<body>
+
+    <div id = "infos">
+        <p>PopUp Chat 1.0</p>
+        <p>Port : </p>
+        <P>Online Users : </P>
+
+    </div>
+    
+    <div id = "messages">
+
+    </div>
+
+    <div class = "chatBar">
+    <form action="">
+        <input id = "pseudo" autocomplete="off" placeholder="pseudo"/>
+        <input id = "msg" autocomplete="off" placeholder="message"/>
+        <button>Envoyer Message</button>
+    </form>
+    </div>
+    <script src="/socket.io/socket.io.js"></script>
+    
+    <script
+			  src="https://code.jquery.com/jquery-3.6.0.min.js"
+			  integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+			  crossorigin="anonymous"></script>
+    <script>
+        
+        $(function(){
+    var socket = io();
+
+    $("form").submit(function (e){
+        e.preventDefault();
+        socket.emit("chat message", $("#pseudo").val(), $("#msg").val());
+        $("#msg").val("");
+        return false; // ????
+    });
+
+    socket.on("chat message", function (msg) {
+        $("#messages").append($("<p>").text(msg));
+    })
+
+    socket.on("connection", function (nbUsers) {
+        $("#infos").append($("<p>").text(nbUsers));
+    })
+
+});
+
+
+	   
+    </script>
+
+    <style type="text/css">
+
+        
+
+    </style>
+</body>
+</html>
