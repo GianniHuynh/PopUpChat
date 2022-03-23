@@ -7,7 +7,7 @@ PopUp chat is an Open-Source decentralized solution for chatting based on Node.j
 The goal of this project is to propose a light solution, secure, easy and quick to deploy on any computer.
 <br/>
 <br/>
-You can try PopUp Chat on the <a href = "129.151.244.35:9500">demo website</a>
+You can try PopUp Chat on the <a href="http://129.151.244.35:9500">demo website</a>
 
 <h2>How it's works ?</h2>
 PopUp chat is a decentralized chat, so that's means that you need to download and deploy PopUpChat on your own machine/server.
