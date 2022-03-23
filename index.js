@@ -98,7 +98,7 @@ rl.question('Please enter port you want (Press enter for random generating) :  '
         io.on("connection", (socket, nbUsers, appPort) => {
             onlineUsers++;
             nbUsers = onlineUsers;
-            console.log("User connected ! (" + nbUsers + " users)");
+            console.log('\x1b[32m%s\x1b[0m',"User connected ! (" + nbUsers + " users)");
             appPort = addr + ":" + port;
             io.emit("userUpdate", nbUsers);
             io.emit("sendAddress", appPort);
@@ -120,18 +120,19 @@ rl.question('Please enter port you want (Press enter for random generating) :  '
             socket.on("disconnect", () => {
                 nbUsers = nbUsers - 1;
                 io.emit("userUpdate", nbUsers);
-                console.log("User disconnected ! (" + nbUsers + " users)");
+                console.log('\x1b[31m%s\x1b[0m',"User disconnected ! (" + nbUsers + " users)");
 
             });
         });
 
         server.listen(port, () => {
-            console.log("PopUp Chat V1.0 is listening on port " + port + " 🚀");
+            console.log('\x1b[36m%s\x1b[0m',"PopUp Chat V1.0 is listening on port " + port + " 🚀");
         });
 
         rl.close();
     });
 });
+
 
 
 
