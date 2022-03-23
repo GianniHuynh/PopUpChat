@@ -1,0 +1,72 @@
+
+let port;
+let addr;
+const version = "1.0";
+
+const readline = require('readline').createInterface({
+    input: process.stdin,
+    output: process.stdout
+})
+
+
+
+
+console.log("=========================================================================================================");
+console.log("=                                POP UP CHAT " + version + " Initialisation                             =");
+console.log("=  Created by Gianni HUYNH - GitHub : https://github.com/GianniHuynh/PopUpChat - Twitter : @GianniHynh  =");
+console.log("=========================================================================================================");
+
+
+
+
+readline.question(`Please enter port you want (7500 by default) : `, choosePort => {
+
+    if (choosePort === ""){
+        port = 7500;
+
+    }
+
+    else {
+        port = choosePort;
+
+    }
+
+    console.log(`Okay ! So the port is now : ${port}`);
+
+
+    readline.close()
+
+})
+
+console.log("=========================================================================================================");
+
+readline.question(`Then, please enter address you want (localhost by default) : `, chooseAddr => {
+
+    if (chooseAddr === ""){
+        addr = "localhost";
+
+    }
+
+    else {
+        addr = chooseAddr;
+
+    }
+
+    console.log(`Okay ! So the port is now : ${addr}`);
+
+
+    readline.close()
+
+})
+
+
+
+
+
+
+
+
+
+
+
+

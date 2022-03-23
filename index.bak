@@ -1,0 +1,65 @@
+const port = 7500; // <-- You can change the port here
+const express = require("express");
+const app = express();
+const server = require("http").createServer(app);
+const io = require("socket.io")(server);
+
+app.use(express.static(__dirname + "/public"));
+
+let onlineUsers = 0;
+
+
+io.on("connection", (socket, nbUsers, appPort) => {
+    onlineUsers++;
+    nbUsers = onlineUsers;
+    console.log("User connected ! (" + nbUsers + " users)");
+    appPort = port;
+    io.emit("userUpdate", nbUsers);
+    io.emit("sendPort", appPort);
+
+    socket.on("chat message", (pseudo, msg) => { // <-- Chat message sent event
+
+        const fullDate = getDate();
+
+
+        if (pseudo === "") {
+            io.emit("chat message", fullDate + " - " + "Anonymous" + " : " + msg );
+            console.log(fullDate + " - " + "Anonymous" + " : " + msg);
+        } else {
+            io.emit("chat message", fullDate + " - " + pseudo + " : " + msg );
+            console.log(fullDate + " - " + pseudo + " : " + msg);
+        }
+    });
+
+    socket.on("disconnect", () => {
+        nbUsers = nbUsers - 1;
+        io.emit("userUpdate", nbUsers);
+        console.log("User disconnected ! (" + nbUsers + " users)");
+
+    });
+});
+
+server.listen(port, () => {
+    console.log("listening on port " + port);
+});
+
+
+function getDate(){  // <-- Function called for getting current time in format "hour:minutes:seconds"
+    const now = new Date();
+    let hour = now.getHours();
+    let minutes = now.getMinutes();
+    let seconds = now.getSeconds();
+    if (hour < 10) {
+        hour = "0" + hour;
+    }
+
+    if (minutes < 10) {
+        minutes = "0" + minutes;
+    }
+
+    if (seconds < 10) {
+        seconds = "0" + seconds;
+    }
+
+    return hour + ":" + minutes + ":" + seconds;
+}

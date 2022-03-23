@@ -1,19 +1,20 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css"   href="/css/style.css">
     
-    <title>UrChat</title>
+    <title>PopUp Chat</title>
 </head>
 <body>
-
+    <div id = "textContent">
     <div id = "infos">
-        <p>PopUp Chat 1.0</p>
-        <p>Port : </p>
-        <P>Online Users : </P>
+        <p>PopUp Chat version 1.0</p>
+        <p>Address : <a id = "appAddr"></a> </p>
+        <P>Online Users : <a id = "onlineUsers"></a></P>
+
 
     </div>
     
@@ -21,13 +22,20 @@
 
     </div>
 
-    <div class = "chatBar">
-    <form action="">
-        <input id = "pseudo" autocomplete="off" placeholder="pseudo"/>
-        <input id = "msg" autocomplete="off" placeholder="message"/>
-        <button>Envoyer Message</button>
-    </form>
     </div>
+
+    <form class = "chatBar" action="">
+        <input id = "pseudo" autocomplete="off" placeholder="pseudo"/>
+        <input id = "msg" autocomplete="off" placeholder="Enter your message"/>
+        <button id = "sendButton" >
+            <img src="assets/send.png" alt = "send button logo" id = "sendButtonImage"/>
+        </button>
+        <img src = "assets/logo.png" alt="logo of popupchat" id = "popUpLogo"/>
+
+    </form>
+
+
+    
     <script src="/socket.io/socket.io.js"></script>
     
     <script
@@ -47,23 +55,31 @@
     });
 
     socket.on("chat message", function (msg) {
-        $("#messages").append($("<p>").text(msg));
+        $("#messages").append($("<h3>").text(msg));
+        scrollLent();
     })
 
-    socket.on("connection", function (nbUsers) {
-        $("#infos").append($("<p>").text(nbUsers));
+
+
+    socket.on("userUpdate", function (nbUsers) {
+        document.getElementById("onlineUsers").innerHTML=nbUsers;
     })
+
+    socket.on("sendAddress", function (appAddr) {
+         document.getElementById("appAddr").innerHTML=appAddr;
+         console.log(appAddr);
+    })
+
 
 });
-
+        // Function used for scroll-down the page
+        function scrollLent() {
+            $("html, body").animate({ scrollTop: $(document).height() }, 1000);
+        }
 
 	   
     </script>
 
-    <style type="text/css">
-
-        
-
-    </style>
+    
 </body>
 </html>

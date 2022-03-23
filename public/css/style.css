@@ -3,39 +3,100 @@
 
 
 * {
-  background-color: #d1dede;
-  color: #1d201f;
+  background-color: #0e0e0e;
+  color: white;
   font-family: 'Nunito', sans-serif;
+  padding: 0;
+  margin: 0;
   
+}
+
+/* A compléter pour faire le feu en personne*/
+h3{
+  background-color: #5dc8e7;
+  color: white;
+  padding: 20px;
+  font-size: 0.9em;
+  margin-top: 2em;
+  margin-right: 60%;
+  border-radius: 10px;
+  display: inline-block;
+
+}
+
+#textContent{
+  margin: 1%;
 }
 
 #messages{
     padding-bottom: 10%; /* Pour pas que le chat soit masqué par la chatBar */
+
 }
+
+#popUpLogo{
+  width: 70px;
+  height: 39px;
+  background-color:white;
+  /*margin-left: 42%;*/
+  margin-left: 43%;
+}
+
+
 
 .chatBar {
   position: fixed;
-  padding: 10px 10px 10px 10px;
   bottom: 0;
   left: 0;
   width: 100%;
   height: 40px;
-  background: #1d201f;
-  color: #d1dede;
+  display: flex;
+  color: #1d1d1d;
+  background-color: white;
+  padding: 20px;
 }
 
 #msg {
-  width: 50%;
+  width: 30%;
   margin-left: 20px;
+  border-style: none;
+
+
+
 }
 
 #pseudo {
   text-align: center;
+  width: 8%;
+  border-style: none;
+
+}
+
+#sendButton{
+  background-color: #5dc8e7;
+  color: white;
+  padding-top: 8px;
+  margin-left: 20px;
+  border-style: none;
+
+}
+
+#sendButtonImage{
+  width: 25px;
+  height: 25px;
+
+  background-color: #5dc8e7;
+}
+
+#infos{
+  text-align: right;
+  position: fixed;
+  top: 10px;
+  right: 10px;
 }
 
 input {
-  background: #d1dede;
-  color: #1d201f;
+  background: #e9e9e9;
+  color: #1d1d1d;
   padding: 12px 20px;
   font-size: 1rem;
   border-style: solid;
@@ -44,16 +105,12 @@ input {
 }
 
 button {
-  color: #1d201f;
-  background-color: #d1dede;
-  padding: 12px 20px;
+  color: #1d1d1d;
+  background-color: #e9e9e9;
+  padding: 12px 15px;
   font-size: 1rem;
   border-style: solid;
   border-radius: 5px;
   outline: transparent;
 }
 
-form {
-  background-color: #1d201f;
-  padding-bottom: 50px;
-}
