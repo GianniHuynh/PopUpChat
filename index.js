@@ -1,70 +1,146 @@
 
-const express = require('express')
-const app = express()
-const port = 7500;
+// port var save port of the server & addr save address of the server & onlineUsers for count users connected
+let port;
+let addr;
+let onlineUsers = 0;
+let version = "1.0";
+
+
+
+// Node.JS Input setup with readline
+const readline = require('readline');
+const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout
+});
+
+// Function called for generate random port
+function randomPort() {
+    return Math.floor(Math.random() * (20000 - 10000 + 1)) + 10000;
+}
+
+// Function called for getting current time in format "hour:minutes:seconds"
+function getDate(){
+    const now = new Date();
+    let hour = now.getHours();
+    let minutes = now.getMinutes();
+    let seconds = now.getSeconds();
+    if (hour < 10) {
+        hour = "0" + hour;
+    }
+
+    if (minutes < 10) {
+        minutes = "0" + minutes;
+    }
+
+    if (seconds < 10) {
+        seconds = "0" + seconds;
+    }
+
+    return hour + ":" + minutes + ":" + seconds;
+}
+
+const express = require("express");
+const app = express();
 const server = require("http").createServer(app);
 const io = require("socket.io")(server);
 
-app.use(express.static(__dirname + '/public'));
 
-var onlineUsers = 0;
 
-io.on("connection", (socket, nbUsers) => {
-  onlineUsers++;
-  nbUsers = onlineUsers;
-  console.log("New user connected ! (" + nbUsers + " users)");
 
-  io.emit(nbUsers);
-  
 
-  socket.on("chat message", (pseudo, msg) => {
-    var now = new Date();
-    var fullDate;
-    var jour = now.getDate();
-    var mois = now.getMonth() + 1;
-    var heure = now.getHours();
-    var minute = now.getMinutes();
-    var secondes = now.getSeconds();
-    var annee = now.getFullYear();
 
-    if (mois < 10) {
-      mois = "0" + mois;
+
+
+
+// Setup of PopUp Chat
+console.log("=========================================================================================================");
+console.log("=                                         POP UP CHAT " + version + " SETUP                                         =");
+console.log("=  Created by Gianni HUYNH - GitHub : https://github.com/GianniHuynh/PopUpChat - Twitter : @GianniHynh  =");
+console.log("=========================================================================================================");
+
+rl.question('Please enter port you want (Press enter for random generating) :  ', function (choosePort) {
+
+    if (choosePort === ""){
+        port = randomPort();
+        choosePort = port;
     }
 
-    if (heure < 10) {
-      heure = "0" + heure;
+    else {
+        port = choosePort;
     }
 
-    if (minute < 10) {
-      minute = "0" + minute;
-    }
 
-    if (secondes < 10){
-        secondes = "0" + secondes;
-    }
+    rl.question('Then, please enter address you want (Press enter for localhost) : ', function (chooseAddr) {
 
-    var fullDate = heure + ":" + minute + ":" + secondes;
+        if (chooseAddr === ""){
+            addr = "localhost";
+            chooseAddr = "localhost";
 
-    if (pseudo == "") {
-      io.emit(
-        "chat message",
-        fullDate + " - " + "Anonymous" + " : " + msg
-      );
-      console.log(
-        fullDate + " - " + "Anonymous" + " : " + msg
-      );
-    } else {
-      io.emit(
-        "chat message",
-        fullDate + " - " + pseudo + " : " + msg
-      );
-      console.log(
-        fullDate + " - " + pseudo + " : " + msg
-      );
-    }
-  });
+        }
+
+        else {
+            addr = chooseAddr;
+
+        }
+
+
+        console.log(`Perfect ! PopUp chat is ready, use "${chooseAddr}:${choosePort}" in a web Browser 🤖`);
+        console.log("=========================================================================================================");
+
+
+
+
+        app.use(express.static(__dirname + "/public"));
+
+
+
+        io.on("connection", (socket, nbUsers, appPort) => {
+            onlineUsers++;
+            nbUsers = onlineUsers;
+            console.log("User connected ! (" + nbUsers + " users)");
+            appPort = addr + ":" + port;
+            io.emit("userUpdate", nbUsers);
+            io.emit("sendAddress", appPort);
+
+            socket.on("chat message", (pseudo, msg) => { // <-- Chat message sent event
+
+                const fullDate = getDate();
+
+
+                if (pseudo === "") {
+                    io.emit("chat message", fullDate + " - " + "Anonymous" + " : " + msg );
+                    console.log(fullDate + " - " + "Anonymous" + " : " + msg);
+                } else {
+                    io.emit("chat message", fullDate + " - " + pseudo + " : " + msg );
+                    console.log(fullDate + " - " + pseudo + " : " + msg);
+                }
+            });
+
+            socket.on("disconnect", () => {
+                nbUsers = nbUsers - 1;
+                io.emit("userUpdate", nbUsers);
+                console.log("User disconnected ! (" + nbUsers + " users)");
+
+            });
+        });
+
+        server.listen(port, () => {
+            console.log("PopUp Chat V1.0 is listening on port " + port + " 🚀");
+        });
+
+        rl.close();
+    });
 });
 
-server.listen(port, () => {
-  console.log("listening on port " + port);
-});
+
+
+
+
+
+
+
+
+
+
+
