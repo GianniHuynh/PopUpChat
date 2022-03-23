@@ -38,7 +38,7 @@ $ sudo dnf module install nodejs:12
 $ sudo pacman -S nodejs npm
 ```
 - Then, clone this repository on your machine :
-```shell
+```
 $ git clone https://github.com/GianniHuynh/PopUpChat
 ```
 - Move into PopUp Chat directory and launch PopUp chat with the following command :
