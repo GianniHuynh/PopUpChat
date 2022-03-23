@@ -7,7 +7,7 @@ PopUp chat is an Open-Source decentralized solution for chatting based on Node.j
 The goal of this project is to propose a light solution, secure, easy and quick to deploy on any computer.
 <br/>
 <br/>
-You can try PopUp Chat on the <a href = "129.151.244.35:9500">demo website</a>
+You can try PopUp Chat on the <a href = "http://129.151.244.35:9500">demo website</a>
 
 <h2>How it's works ?</h2>
 PopUp chat is a decentralized chat, so that's means that you need to download and deploy PopUpChat on your own machine/server.
@@ -18,7 +18,7 @@ PopUp server can be deployed on Windows, Linux and macOS, but in all these cases
 <br/>
 <h3>Windows and macOS :</h3>
 - First install Node.js if you didn't have it (https://nodejs.org)
-- Then, clone this repository on your machine
+- Then, clone this repository on your machine :
 ```shell
 $ git clone https://github.com/GianniHuynh/PopUpChat
 ```
@@ -29,7 +29,7 @@ $ node index.js
 <br/>
 
 <h3>Linux :</h3>
-- First install Node.js and npm if you didn't have it 
+- First install Node.js and npm if you didn't have it :
 ```shell
 # Debian/Ubuntu
 $ sudo apt install nodejs npm
@@ -38,7 +38,7 @@ $ sudo dnf module install nodejs:12
 # Arch Linux/Manjaro Linux
 $ sudo pacman -S nodejs npm
 ```
-- Then, clone this repository on your machine
+- Then, clone this repository on your machine :
 ```shell
 $ git clone https://github.com/GianniHuynh/PopUpChat
 ```
