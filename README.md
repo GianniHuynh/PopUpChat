@@ -9,6 +9,7 @@ The goal of this project is to propose a light solution, secure, easy and quick 
 <br/>
 You can try PopUp Chat on the <a href = "http://129.151.244.35:9500">demo website</a>
 
+
 <h2>How it's works ?</h2>
 PopUp chat is a decentralized chat, so that's means that you need to download and deploy PopUpChat on your own machine/server.
 When PopUpChat server is deployed, you can connect to it with a web browser, by this process, YOU AND ONLY YOU can see and control the data on your PopUp Chat version, NO DATA is collected on our servers.
