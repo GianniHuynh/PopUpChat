@@ -20,23 +20,21 @@ PopUp server can be deployed on Windows, Linux and macOS, but in all these cases
 <h3>Windows and macOS :</h3>
 - First install Node.js if you didn't have it (https://nodejs.org)
 - Then, clone this repository on your machine :
-    $ git clone https://github.com/GianniHuynh/PopUpChat
+ `$ git clone https://github.com/GianniHuynh/PopUpChat`
 - Move into PopUp Chat directory and launch PopUp chat with the following command :
-```shell
-$ node index.js
-```
+`$ node index.js`
 <br/>
 
 <h3>Linux :</h3>
 - First install Node.js and npm if you didn't have it :
-```shell
+`
 # Debian/Ubuntu
 $ sudo apt install nodejs npm
 # Fedora/Red-Hat/Cent OS
 $ sudo dnf module install nodejs:12
 # Arch Linux/Manjaro Linux
 $ sudo pacman -S nodejs npm
-```
+`
 - Then, clone this repository on your machine :
 ```
 $ git clone https://github.com/GianniHuynh/PopUpChat
