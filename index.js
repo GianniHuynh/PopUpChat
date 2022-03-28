@@ -1,4 +1,4 @@
-
+// Pop Up Chat V1.0 by Gianni HUYNH
 // port var save port of the server & addr save address of the server & onlineUsers for count users connected
 let port;
 let addr;
