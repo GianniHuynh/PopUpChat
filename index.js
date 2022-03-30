@@ -6,9 +6,12 @@ let onlineUsers = 0;
 let version = "1.0";
 
 
-
 // Node.JS Input setup with readline
 const readline = require('readline');
+const express = require("express");
+const app = express();
+const server = require("http").createServer(app);
+const io = require("socket.io")(server);
 const rl = readline.createInterface({
     input: process.stdin,
     output: process.stdout
@@ -39,19 +42,6 @@ function getDate(){
 
     return hour + ":" + minutes + ":" + seconds;
 }
-
-const express = require("express");
-const app = express();
-const server = require("http").createServer(app);
-const io = require("socket.io")(server);
-
-
-
-
-
-
-
-
 
 // Setup of PopUp Chat
 console.log("=========================================================================================================");
