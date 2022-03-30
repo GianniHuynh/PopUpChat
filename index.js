@@ -1,7 +1,7 @@
-// Pop Up Chat V1.0 by Gianni HUYNH - Script côté serveur
-// port var save port of the server & addr save address of the server & onlineUsers for count users connected
+// Pop Up Chat V1.0 by Gianni HUYNH - Server-side Script
+// port var save port of the server & host save address of the server & onlineUsers for count users connected
 let port;
-let addr;
+let host;
 let onlineUsers = 0;
 let version = "1.0";
 
@@ -64,13 +64,13 @@ rl.question('Please enter port you want (Press enter for random generating) :  '
     rl.question('Then, please enter address you want (Press enter for localhost) : ', function (chooseAddr) {
 
         if (chooseAddr === ""){
-            addr = "localhost";
+            host = "localhost";
             chooseAddr = "localhost";
 
         }
 
         else {
-            addr = chooseAddr;
+            host = chooseAddr;
 
         }
 
@@ -89,7 +89,7 @@ rl.question('Please enter port you want (Press enter for random generating) :  '
             onlineUsers++;
             nbUsers = onlineUsers;
             console.log('\x1b[32m%s\x1b[0m',"User connected ! (" + nbUsers + " users)");
-            appPort = addr + ":" + port;
+            appPort = host + ":" + port;
             io.emit("userUpdate", nbUsers);
             io.emit("sendAddress", appPort);
 
