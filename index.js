@@ -109,6 +109,7 @@ rl.question('Please enter port you want (Press enter for random generating) :  '
 
             socket.on("disconnect", () => {
                 nbUsers = nbUsers - 1;
+                onlineUsers = onlineUsers - 1;
                 io.emit("userUpdate", nbUsers);
                 console.log('\x1b[31m%s\x1b[0m',"User disconnected ! (" + nbUsers + " users)");
 
