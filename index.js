@@ -43,6 +43,29 @@ function getDate(){
     return hour + ":" + minutes + ":" + seconds;
 }
 
+// Function called for getting current time in format "day:month/hour:minutes:seconds"
+function getFullDate(){
+    const now = new Date();
+    let day = now.getDate();
+    let month = now.getMonth() + 1;
+    let hour = now.getHours();
+    let minutes = now.getMinutes();
+    let seconds = now.getSeconds();
+    if (hour < 10) {
+        hour = "0" + hour;
+    }
+
+    if (minutes < 10) {
+        minutes = "0" + minutes;
+    }
+
+    if (seconds < 10) {
+        seconds = "0" + seconds;
+    }
+
+    return day + "/" + month + " | " + hour + ":" + minutes + ":" + seconds;
+}
+
 // Setup of PopUp Chat
 console.log("=========================================================================================================");
 console.log("=                                         POP UP CHAT " + version + " SETUP                                         =");
@@ -75,7 +98,7 @@ rl.question('Please enter port you want (Press enter for random generating) :  '
         }
 
 
-        console.log(`Perfect ! PopUp chat is ready, use "${chooseAddr}:${choosePort}" in a web Browser 🤖`);
+        console.log(`Perfect ! PopUp chat is ready, use "http://${chooseAddr}:${choosePort}" in a web Browser 🤖`);
         console.log("=========================================================================================================");
 
 
@@ -96,14 +119,15 @@ rl.question('Please enter port you want (Press enter for random generating) :  '
             socket.on("chat message", (pseudo, msg) => { // <-- Chat message sent event
 
                 const fullDate = getDate();
+                const consoleFullDate = getFullDate();
 
 
                 if (pseudo === "") {
                     io.emit("chat message", fullDate + " - " + "Anonymous" + " : " + msg );
-                    console.log(fullDate + " - " + "Anonymous" + " : " + msg);
+                    console.log(consoleFullDate + " - " + "Anonymous" + " : " + msg);
                 } else {
                     io.emit("chat message", fullDate + " - " + pseudo + " : " + msg );
-                    console.log(fullDate + " - " + pseudo + " : " + msg);
+                    console.log(consoleFullDate + " - " + pseudo + " : " + msg);
                 }
             });
 
